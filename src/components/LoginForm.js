@@ -55,7 +55,7 @@ class LoginForm extends Component {
           {this.props.error}
         </Text>
         <CardSection>
-          {this.renderButtion()}
+          {this.renderButton()}
         </CardSection>
       </Card>
     );
