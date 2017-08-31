@@ -5,22 +5,19 @@ import { employeeUpdate, employeeCreate } from '../actions';
 import { Card, CardSection, Input, Button } from './common';
 
 class EmployeeCreate extends Component {
-  constructor(props) {
-    super(props);
-    this.onButtonPress = this.onButtonPress.bind(this);
-  }
   onButtonPress() {
     const { name, phone, shift } = this.props;
 
     this.props.employeeCreate({ name, phone, shift: shift || 'Monday' });
   }
+
   render() {
     return (
       <Card>
         <CardSection>
           <Input
             label="Name"
-            placeholder="John"
+            placeholder="Jane"
             value={this.props.name}
             onChangeText={value => this.props.employeeUpdate({ prop: 'name', value })}
           />
@@ -36,7 +33,7 @@ class EmployeeCreate extends Component {
         </CardSection>
 
         <CardSection style={{ flexDirection: 'column' }}>
-          <Text style={styles.pickerLabelStyle}>Shift</Text>
+          <Text style={styles.pickerTextStyle}>Shift</Text>
           <Picker
             selectedValue={this.props.shift}
             onValueChange={value => this.props.employeeUpdate({ prop: 'shift', value })}
@@ -52,7 +49,7 @@ class EmployeeCreate extends Component {
         </CardSection>
 
         <CardSection>
-          <Button onPress={this.onButtonPress}>
+          <Button onPress={this.onButtonPress.bind(this)}>
             Create
           </Button>
         </CardSection>
@@ -62,7 +59,7 @@ class EmployeeCreate extends Component {
 }
 
 const styles = {
-  pickerLabelStyle: {
+  pickerTextStyle: {
     fontSize: 18,
     paddingLeft: 20
   }
@@ -75,4 +72,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  employeeUpdate, employeeCreate })(EmployeeCreate);
+  employeeUpdate, employeeCreate
+})(EmployeeCreate);
